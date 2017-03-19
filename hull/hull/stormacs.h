@@ -23,7 +23,7 @@ extern void flush_##X##_blocks(void);	\
 void free_##X##_storage(void);		\
 
 
-#define INCP(X,p,k) ((##X*) ( (char*)p + (k) * ##X##_size)) /* portability? */
+#define INCP(X,p,k) ((X*) ( (char*)p + (k) * X##_size)) /* portability? */
 
 
 #define STORAGE(X)						\
@@ -41,11 +41,11 @@ X *new_block_##X(int make_blocks)				\
 /* DEBEXP(-10, num_##X##_blocks) */				\
 		assert(num_##X##_blocks<max_blocks);		\
 /* before = _memfree(0);*/					\
- DEB(0, before) DEBEXP(0, Nobj * ##X##_size)			\
+ DEB(0, before) DEBEXP(0, Nobj * X##_size)			\
 								\
 		xbt = X##_block_table[num_##X##_blocks++] =	\
-			(X*)malloc(Nobj * ##X##_size);		\
- 			memset(xbt,0,Nobj * ##X##_size);	\
+			(X*)malloc(Nobj * X##_size);		\
+ 			memset(xbt,0,Nobj * X##_size);	\
 /* DEB(0, after) DEBEXP(0, 8*_howbig((long*)xbt))*/		\
 		if (!xbt) {					\
 			DEBEXP(-10,num_##X##_blocks)		\
@@ -110,7 +110,7 @@ void free_##X##_storage(void) {new_block_##X(0);}		\
 	int i;						\
 	neighbor *mrsn;					\
 							\
-	for (i=-1,mrsn=s##->neigh-1;i<cdim;i++,mrsn++)	\
+	for (i=-1,mrsn=s->neigh-1;i<cdim;i++,mrsn++)	\
 		op##_ref(basis_s, mrsn->basis);		\
 }
 

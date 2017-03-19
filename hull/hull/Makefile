@@ -12,10 +12,12 @@ SRC	= hull.c ch.c io.c rand.c pointops.c fg.c
 BINDIR	= ../bin
 LIBDIR	= ../lib
 LIB	= $(LIBDIR)/lib$(PROG).a
-EXE	= .exe
+# EXE	= .exe
+EXE	=
 PROG	= hull$(EXE)
 
 all	: $(PROG) rsites$(EXE)
+	mkdir -p $(BINDIR)
 	cp $(PROG) $(BINDIR)/.
 	cp rsites $(BINDIR)/.
 #	$(AR) rcv $(LIB) $(OBJS)
